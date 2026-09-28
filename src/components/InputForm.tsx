@@ -91,6 +91,30 @@ export const InputForm: React.FC<InputFormProps> = ({ formData, onChange }) => {
         />
       </View>
 
+      {/* مفتاح تفعيل نسبة العمولة اليدوية */}
+      <View style={styles.switchRow}>
+        <Text style={styles.label}>تحديد نسبة العمولة يدوياً (تلقائي 5%)</Text>
+        <Switch
+          value={formData.isCustomCommission}
+          onValueChange={(val) => onChange("isCustomCommission", val)}
+          trackColor={{ false: "#767577", true: "#28a745" }}
+        />
+      </View>
+
+      {/* حقل إدخال نسبة العمولة */}
+      {formData.isCustomCommission && (
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>نسبة العمولة (%)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="مثال: 2.5 أو 5"
+            keyboardType="numeric"
+            value={formData.customCommission}
+            onChangeText={(val) => onChange("customCommission", val)}
+          />
+        </View>
+      )}
+
       {/* عدد الدفعات */}
       <View style={styles.inputGroup}>
         <Text style={styles.label}>عدد الدفعات</Text>

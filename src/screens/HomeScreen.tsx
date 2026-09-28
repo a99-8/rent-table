@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
-  SafeAreaView,
   Platform,
 } from "react-native";
 import ViewShot from "react-native-view-shot";
-import * as Sharing from "expo-sharing"; // استيراد مكتبة المشاركة
+import { SafeAreaView } from "react-native-safe-area-context";
+import * as Sharing from "expo-sharing";
 
 import { RentFormData } from "../types";
 import {
@@ -32,6 +32,8 @@ export const HomeScreen = () => {
     insurance: "",
     water: "",
     paymentFrequency: 1,
+    isCustomCommission: false, // القيمة الافتراضية لحالة زر التبديل
+    customCommission: "", // القيمة الافتراضية لحقل العمولة اليدوية
   });
 
   useEffect(() => {
@@ -64,12 +66,10 @@ export const HomeScreen = () => {
     }
   };
 
-  // دالة المشاركة بدلاً من النسخ للحافظة
   const handleShareImage = async () => {
     const uri = await captureTable();
     if (!uri) return;
 
-    // التحقق مما إذا كانت الميزة مدعومة على الجهاز
     const isAvailable = await Sharing.isAvailableAsync();
     if (isAvailable) {
       await Sharing.shareAsync(uri, {
@@ -95,7 +95,6 @@ export const HomeScreen = () => {
 
         <ViewShot
           ref={viewShotRef}
-          // العودة لحفظ الصورة كملف مؤقت بدلاً من base64
           options={{ format: "png", quality: 1.0, result: "tmpfile" }}
           style={{ backgroundColor: "#fff", padding: 12, borderRadius: 8 }}
         >
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   btn: {
-    backgroundColor: "#25D366", // لون الواتساب الأخضر
+    backgroundColor: "#25D366",
     paddingVertical: 12,
     paddingHorizontal: 8,
     borderRadius: 8,

@@ -7,6 +7,8 @@ export interface RentFormData {
   insurance: string;
   water: string;
   paymentFrequency: PaymentFrequency;
+  isCustomCommission: boolean;
+  customCommission: string;
 }
 
 export interface CalculationResult {

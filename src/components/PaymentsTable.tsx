@@ -70,7 +70,7 @@ export const PaymentsTable: React.FC<PaymentsTableProps> = ({
 
         {/* العمولة */}
         <View style={styles.row}>
-          <Text style={[styles.cell, styles.labelCell]}>العمولة - 5%</Text>
+          <Text style={[styles.cell, styles.labelCell]}>العمولة</Text>
           <Text style={[styles.cell, styles.valueCell]}>
             {formatNum(perPayment.commission)} ر.س
           </Text>
